@@ -1,0 +1,61 @@
+@CHARSET "UTF-8";
+
+.headline {
+	margin: 6px 4px 1px 12px;
+	font-family: arial, sans-serif;
+	font-size: 24px;
+	font-weight: bold;
+	color: darkgrey;
+}
+
+.label {
+	margin: 12px 4px 1px 12px;
+	font-family: arial, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: darkgrey;
+	width: 100px;
+}
+
+.formularContainer {
+	margin: 6px 12px 2px 12px;
+	padding: 6px;
+	border: 1px solid darkgray;
+	width: 512px;
+	background-color: white;
+}
+
+.protocolContainer {
+	margin: 6px 12px 2px 12px;
+	padding: 6px;
+	border: 1px solid darkgray;
+	width: 512px;
+	background-color: white;
+	font-family: arial, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: darkgrey;
+	height: 512px;
+}
+
+.textBox {
+	margin: 6px 4px 2px 12px;
+	display: block;
+	font-family: arial, sans-serif;
+	font-size: 14px;
+	font-weight: normal;
+	color: darkgrey;
+}
+
+.formularButton {
+	width: 128px;
+	height: 36px;
+	margin: 18px 6px 6px 6px;
+	background-color: lightgray;
+	color: black;
+	font-weight: bold;
+	font-size: 14px;
+	border-top-left-radius: 12px;
+	border-bottom-right-radius: 12px;
+	border: 2px solid darkgrey;
+}
