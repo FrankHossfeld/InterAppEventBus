@@ -6,6 +6,8 @@
   <inherits name='com.google.gwt.user.User'/>
 
   <!-- Other module inherits                                      -->
+  <inherits name="elemental2.dom.Dom"/>
+  <inherits name="elemental2.webstorage.WebStorage"/>
 
   <!-- Specify the app entry point class.                         -->
 

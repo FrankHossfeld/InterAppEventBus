@@ -17,7 +17,7 @@
   <properties>
     <!-- Convenience property to set the GWT version -->
     <gwtVersion>2.8.1</gwtVersion>
-
+    <elemental2.version>1.0.0-beta-1</elemental2.version>
     <!-- GWT needs at least java 1.6 -->
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
@@ -51,10 +51,27 @@
     <dependency>
       <groupId>com.google.gwt</groupId>
       <artifactId>gwt-user</artifactId>
+      <version>${gwtVersion}</version>
     </dependency>
     <dependency>
       <groupId>com.google.gwt</groupId>
       <artifactId>gwt-dev</artifactId>
+      <version>${gwtVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.elemental2</groupId>
+      <artifactId>elemental2-core</artifactId>
+      <version>${elemental2.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.elemental2</groupId>
+      <artifactId>elemental2-dom</artifactId>
+      <version>${elemental2.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.elemental2</groupId>
+      <artifactId>elemental2-webstorage</artifactId>
+      <version>${elemental2.version}</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
@@ -87,6 +104,7 @@
     <plugins>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.20</version>
         <configuration>
           <skipTests>true</skipTests>
         </configuration>
@@ -94,6 +112,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.6.1</version>
         <configuration>
           <source>${maven.compiler.source}</source>
           <target>${maven.compiler.target}</target>
