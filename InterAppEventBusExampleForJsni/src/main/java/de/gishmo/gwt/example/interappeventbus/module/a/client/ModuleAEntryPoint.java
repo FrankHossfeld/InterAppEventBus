@@ -58,7 +58,7 @@ public class ModuleAEntryPoint
                                               .createArray(0));
       data.push("DocId: " + tbDocId.getText());
       InterAppEventBus.fireEvent("showDocument", data);
-      protocolContainer.add(new Label("Fire Event: >>showDopcument<< for DocId: >>" + tbDocId.getText() + "<<"));
+      protocolContainer.add(new Label("Fire Event: >>showDocument<< for DocId: >>" + tbDocId.getText() + "<<"));
     });
     hp02.add(showDocIdbutton);
 
