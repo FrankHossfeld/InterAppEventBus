@@ -28,7 +28,6 @@ public class InterAppEventBus {
 
   public static void fireEvent(String eventType,
                                Object data) {
-    // TODO MSIE8 and lower not supported
     Window window = DomGlobal.window.top;
     Document document = DomGlobal.document;
 
