@@ -10,9 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author Sam
- */
 public class InterAppEventBus {
 
   private static Map<String, List<InterAppEventHandler>> handlersByType = new HashMap<>();

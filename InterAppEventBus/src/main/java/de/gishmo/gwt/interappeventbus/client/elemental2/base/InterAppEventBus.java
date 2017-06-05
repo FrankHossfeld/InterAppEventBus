@@ -14,9 +14,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author Sam
- */
 public class InterAppEventBus {
 
   private static Map<String, List<InterAppEventHandler>> handlersByType = new HashMap<>();
@@ -71,9 +68,10 @@ public class InterAppEventBus {
     Document document = DomGlobal.document;
     document.addEventListener(eventType,
                               (e) -> {
+                                CustomEvent customEvent = (CustomEvent) e;
                                 Window window = DomGlobal.window.top;
                                 Storage storage = WebStorageWindow.of(window).sessionStorage;
-                                String key = (String) ((CustomEvent) e).detail;
+                                String key = (String) customEvent.detail;
                                 String data = storage.getItem(key);
                                 storage.removeItem(key);
                                 pickListener(eventType,
@@ -102,7 +100,7 @@ public class InterAppEventBus {
     } else {
       if (ua.contains("MSIE 10.0")) {
         return true;
-      } else if (ua.contains("MSIE 9.0") ) {
+      } else if (ua.contains("MSIE 9.0")) {
         return true;
       }
     }
