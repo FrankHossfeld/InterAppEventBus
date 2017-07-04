@@ -1,4 +1,4 @@
-package de.gishmo.gwt.interappeventbus.client.elemental2.base;
+package de.gishmo.gwt.interappeventbus.client;
 
 /*
  * File: Math.uuid.js

@@ -6,23 +6,30 @@ import com.google.gwt.core.client.JsArrayString;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.*;
-import de.gishmo.gwt.interappeventbus.client.elemental2.document.base.InterAppEventBus;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.VerticalPanel;
+
+import de.gishmo.gwt.interappeventbus.client.elemental.InterAppEventBusForIFrame;
 
 public class ModuleAEntryPoint
   implements EntryPoint {
 
   private FlowPanel protocolContainer;
-	private TextBox tbDocId;
+  private TextBox   tbDocId;
 
-	@Override
-	public void onModuleLoad() {
-		if (!InterAppEventBus.isSupported()) {
-			Window.alert("Sorry, Custom event is not supported in this browser.");
-		}
+  @Override
+  public void onModuleLoad() {
+    if (!InterAppEventBusForIFrame.isSupported()) {
+      Window.alert("Sorry, Custom event is not supported in this browser.");
+    }
 
-    Resources resources = GWT.create(Resources.class);
-    ApplicaitonStyle style = resources.style();
+    Resources        resources = GWT.create(Resources.class);
+    ApplicaitonStyle style     = resources.style();
     style.ensureInjected();
 
     FlowPanel container = new FlowPanel();
@@ -53,11 +60,12 @@ public class ModuleAEntryPoint
 
     Button showDocIdbutton = new Button("Send DocID");
     showDocIdbutton.addStyleName(style.formularButton());
-		showDocIdbutton.addClickHandler(event -> {
-      JsArrayString data = ((JsArrayString) JsArrayString
-                                              .createArray(0));
+    showDocIdbutton.addClickHandler(event -> {
+      JsArrayString data = ((JsArrayString) JsArrayString.createArray(0));
       data.push("DocId: " + tbDocId.getText());
-      InterAppEventBus.fireEvent("showDocument", data);
+      InterAppEventBusForIFrame.fireEvent("showDocument",
+                                          "http://127.0.0.1:8887",
+                                          "DocId: " + tbDocId.getText());
       protocolContainer.add(new Label("Fire Event: >>showDocument<< for DocId: >>" + tbDocId.getText() + "<<"));
     });
     hp02.add(showDocIdbutton);
@@ -65,21 +73,23 @@ public class ModuleAEntryPoint
     Button editDocIdbutton = new Button("Edit DocID");
     editDocIdbutton.addStyleName(style.formularButton());
     editDocIdbutton.addClickHandler(event -> {
-      JsArrayString data = ((JsArrayString) JsArrayString
-                                              .createArray(0));
+      JsArrayString data = ((JsArrayString) JsArrayString.createArray(0));
       data.push("DocId: " + tbDocId.getText());
-      InterAppEventBus.fireEvent("editDocument", data);
+      InterAppEventBusForIFrame.fireEvent("editDocument",
+                                          "http://127.0.0.1:8887",
+                                          data);
       protocolContainer.add(new Label("Fire Event: >>editDocument<< for DocId: >>" + tbDocId.getText() + "<<"));
     });
     hp02.add(editDocIdbutton);
 
-		Button removeDocIdbutton = new Button("Remove DocId");
+    Button removeDocIdbutton = new Button("Remove DocId");
     removeDocIdbutton.addStyleName(style.formularButton());
-		removeDocIdbutton.addClickHandler(event -> {
-      JsArrayString data = ((JsArrayString) JsArrayString
-                                              .createArray(0));
+    removeDocIdbutton.addClickHandler(event -> {
+      JsArrayString data = ((JsArrayString) JsArrayString.createArray(0));
       data.push("DocId" + tbDocId.getText());
-      InterAppEventBus.fireEvent("removeDocument", data);
+      InterAppEventBusForIFrame.fireEvent("removeDocument",
+                                          "http://127.0.0.1:8887",
+                                          data);
       protocolContainer.add(new Label("Fire Event: >>removeDocument<< for DocId: >>" + tbDocId.getText() + "<<"));
     });
     hp02.add(removeDocIdbutton);
@@ -88,10 +98,11 @@ public class ModuleAEntryPoint
     protocolContainer.addStyleName(style.protocolContainer());
     container.add(protocolContainer);
 
-		RootPanel.get("moduleA").add(container);
-	}
+    RootPanel.get("moduleA")
+             .add(container);
+  }
 
- public interface Resources
+  public interface Resources
     extends ClientBundle {
 
     @Source("application.css")

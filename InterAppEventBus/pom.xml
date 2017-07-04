@@ -59,6 +59,11 @@
       <version>${gwtVersion}</version>
     </dependency>
     <dependency>
+      <groupId>com.google.gwt</groupId>
+      <artifactId>gwt-elemental</artifactId>
+      <version>${gwtVersion}</version>
+    </dependency>
+    <dependency>
       <groupId>com.google.elemental2</groupId>
       <artifactId>elemental2-core</artifactId>
       <version>${elemental2.version}</version>

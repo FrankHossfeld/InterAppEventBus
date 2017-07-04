@@ -8,7 +8,7 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 
-import de.gishmo.gwt.interappeventbus.client.elemental2.InterAppEventBus;
+import de.gishmo.gwt.interappeventbus.client.elemental.InterAppEventBusForIFrame;
 import de.gishmo.gwt.interappeventbus.client.elemental2.prototype.InterAppEventHandler;
 
 public class ModuleBEntryPoint
@@ -37,7 +37,7 @@ public class ModuleBEntryPoint
 		protocolContainer.addStyleName(style.protocolContainer());
 		container.add(protocolContainer);
 
-		InterAppEventBus.addListener(new InterAppEventHandler() {
+		InterAppEventBusForIFrame.addListener(new InterAppEventHandler() {
 			@Override
 			public void onEvent(String data) {
 				logEvent(getType(),
@@ -50,31 +50,31 @@ public class ModuleBEntryPoint
 			}
 		});
 
-    InterAppEventBus.addListener(new InterAppEventHandler() {
-      @Override
-      public void onEvent(String data) {
-        logEvent(getType(),
-								 data);
-      }
-
-      @Override
-      public String getType() {
-        return "editDocument";
-      }
-    });
-
-    InterAppEventBus.addListener(new InterAppEventHandler() {
-      @Override
-      public void onEvent(String data) {
-        logEvent(getType(),
-								 data);
-      }
-
-      @Override
-      public String getType() {
-        return "removeDocument";
-      }
-    });
+//		InterAppEventBusForIFrame.addListener(new InterAppEventHandler() {
+//      @Override
+//      public void onEvent(String data) {
+//        logEvent(getType(),
+//								 data);
+//      }
+//
+//      @Override
+//      public String getType() {
+//        return "editDocument";
+//      }
+//    });
+//
+//		InterAppEventBusForIFrame.addListener(new InterAppEventHandler() {
+//      @Override
+//      public void onEvent(String data) {
+//        logEvent(getType(),
+//								 data);
+//      }
+//
+//      @Override
+//      public String getType() {
+//        return "removeDocument";
+//      }
+//    });
 
     GWT.debugger();
 		RootPanel.get().add(container);

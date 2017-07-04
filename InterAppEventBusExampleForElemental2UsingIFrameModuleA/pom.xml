@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>de.gishmo.gwt.example</groupId>
-  <artifactId>InterAppEventBusExampleForElemental2ModuleB</artifactId>
+  <artifactId>InterAppEventBusExampleForElemental2UsingIFrameModuleA</artifactId>
   <version>1.0-SNAPSHOT</version>
 
   <packaging>gwt-app</packaging>
@@ -98,9 +98,9 @@
         </executions>
         <configuration>
           <classpathScope>compile</classpathScope>
-          <moduleName>de.gishmo.gwt.example.interappeventbus.module.b.ModuleB</moduleName>
-          <moduleShortName>InterAppEventBusExampleUsingElemental2ModuleB</moduleShortName>
-          <modules>de.gishmo.gwt.example.interappeventbus.module.b.ModuleB</modules>
+          <moduleName>de.gishmo.gwt.example.interappeventbus.module.a.ModuleA</moduleName>
+          <moduleShortName>InterAppEventBusExampleModuleA</moduleShortName>
+          <modules>de.gishmo.gwt.example.interappeventbus.module.a.ModuleA</modules>
           <failOnError>true</failOnError>
           <!-- GWT 2.8 requires 1.8, hence define sourceLevel here if you use
                a different source language for java compilation -->
@@ -113,15 +113,16 @@
           </compilerArgs>
           <logLevel>TRACE</logLevel>
           <skipModule>true</skipModule>
+          <codeServerPort>9876</codeServerPort>
           <devmodeArgs>
             <arg>-port</arg>
-            <arg>8887</arg>
+            <arg>8888</arg>
             <arg>-codeServerPort</arg>
-            <arg>9875</arg>
+            <arg>9876</arg>
           </devmodeArgs>
-          <!--<startupUrls>-->
-            <!--<startupInterAppEventBusExampleUsingElemental2ModuleB.htmlhtml</startupUrl>-->
-          <!--</startupUrls>-->
+          <startupUrls>
+            <startupUrl>InterAppEventBusExampleUsinfElemental2.html</startupUrl>
+          </startupUrls>
           <warDir>${project.basedir}/src/main/webapp</warDir>
           <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
           <systemProperties>

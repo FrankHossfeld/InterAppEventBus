@@ -1,4 +1,4 @@
-package de.gishmo.gwt.interappeventbus.client.elemental2.prototype;
+package de.gishmo.gwt.interappeventbus.client.elemental.prototype;
 
 public interface InterAppEventHandler {
 

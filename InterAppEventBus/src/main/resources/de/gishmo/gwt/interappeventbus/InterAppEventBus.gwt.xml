@@ -8,6 +8,7 @@
   <!-- Other module inherits                                      -->
   <inherits name="elemental2.dom.Dom"/>
   <inherits name="elemental2.webstorage.WebStorage"/>
+  <inherits name="elemental.Elemental"/>
 
   <!-- Specify the app entry point class.                         -->
 

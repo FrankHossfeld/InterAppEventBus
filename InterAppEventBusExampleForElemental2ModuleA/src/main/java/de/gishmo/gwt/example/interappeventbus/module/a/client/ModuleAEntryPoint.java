@@ -7,7 +7,8 @@ import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
-import de.gishmo.gwt.interappeventbus.client.elemental2.base.InterAppEventBus;
+
+import de.gishmo.gwt.interappeventbus.client.elemental2.InterAppEventBus;
 
 public class ModuleAEntryPoint
   implements EntryPoint {
