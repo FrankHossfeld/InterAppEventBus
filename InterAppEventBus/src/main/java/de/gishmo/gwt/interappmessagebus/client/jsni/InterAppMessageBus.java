@@ -28,18 +28,15 @@ public class InterAppMessageBus {
                                         JavaScriptObject data)/*-{
       // post message
       debugger;
-      var window = $wnd;
       var ua = window.navigator.userAgent;
-      var safari = ua.indexOf("Safari");
-      var chrome = ua.indexOf("Chrome");
-      if (safari > 0) {
-          if (chrome > 0) {
-              window.frames[frameName].contentWindow.postMessage(data, '*');
+      if (ua.indexOf("Safari") > 0) {
+          if (ua.indexOf("Chrome") > 0) {
+              $wnd.frames[frameName].contentWindow.postMessage(data, '*');
           } else {
-              window.frames[frameName].postMessage(data, '*');
+              $wnd.frames[frameName].postMessage(data, '*');
           }
       } else {
-          window.frames[frameName].contentWindow.postMessage(data, '*');
+          $wnd.frames[frameName].contentWindow.postMessage(data, '*');
       }
   }-*/;
 
