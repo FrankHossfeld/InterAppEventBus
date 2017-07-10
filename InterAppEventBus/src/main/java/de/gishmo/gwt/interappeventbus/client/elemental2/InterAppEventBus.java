@@ -1,21 +1,19 @@
 package de.gishmo.gwt.interappeventbus.client.elemental2;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.google.gwt.core.client.Scheduler;
-
 import de.gishmo.gwt.interappeventbus.client.GUID;
 import de.gishmo.gwt.interappeventbus.client.elemental2.prototype.InterAppEventHandler;
-
 import elemental2.dom.CustomEvent;
 import elemental2.dom.Document;
 import elemental2.dom.DomGlobal;
 import elemental2.dom.Window;
 import elemental2.webstorage.Storage;
 import elemental2.webstorage.WebStorageWindow;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class InterAppEventBus {
 
@@ -30,7 +28,6 @@ public class InterAppEventBus {
                                Object data) {
 
         Window   window   = DomGlobal.window;
-        Document document = DomGlobal.document;
 
         Storage storage    = WebStorageWindow.of(window).sessionStorage;
         String  dataString = (data == null) ? "" : data.toString();

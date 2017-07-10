@@ -75,9 +75,9 @@ public class ModuleAEntryPoint
     editDocIdbutton.addClickHandler(event -> {
       JsArrayString data = ((JsArrayString) JsArrayString.createArray(0));
       data.push("DocId: " + tbDocId.getText());
-      InterAppEventBusForIFrame.fireEvent("editDocument",
-                                          "http://127.0.0.1:8887",
-                                          data);
+//      InterAppEventBusForIFrame.fireEvent("editDocument",
+//                                          "http://127.0.0.1:8887",
+//                                          data);
       protocolContainer.add(new Label("Fire Event: >>editDocument<< for DocId: >>" + tbDocId.getText() + "<<"));
     });
     hp02.add(editDocIdbutton);
@@ -87,9 +87,9 @@ public class ModuleAEntryPoint
     removeDocIdbutton.addClickHandler(event -> {
       JsArrayString data = ((JsArrayString) JsArrayString.createArray(0));
       data.push("DocId" + tbDocId.getText());
-      InterAppEventBusForIFrame.fireEvent("removeDocument",
-                                          "http://127.0.0.1:8887",
-                                          data);
+//      InterAppEventBusForIFrame.fireEvent("removeDocument",
+//                                          "http://127.0.0.1:8887",
+//                                          data);
       protocolContainer.add(new Label("Fire Event: >>removeDocument<< for DocId: >>" + tbDocId.getText() + "<<"));
     });
     hp02.add(removeDocIdbutton);

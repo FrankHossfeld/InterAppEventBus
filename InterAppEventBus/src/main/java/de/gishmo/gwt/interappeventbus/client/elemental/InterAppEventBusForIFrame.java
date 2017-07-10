@@ -1,23 +1,20 @@
 package de.gishmo.gwt.interappeventbus.client.elemental;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
-
 import de.gishmo.gwt.interappeventbus.client.GUID;
 import de.gishmo.gwt.interappeventbus.client.elemental2.prototype.InterAppEventHandler;
-
 import elemental.client.Browser;
 import elemental.dom.Element;
-import elemental.dom.Node;
 import elemental.dom.NodeList;
 import elemental.html.IFrameElement;
 import elemental.html.Storage;
 import elemental.html.Window;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class InterAppEventBusForIFrame {
 
@@ -39,6 +36,7 @@ public class InterAppEventBusForIFrame {
     GWT.debugger();
     Element el = Browser.getDocument()
                         .querySelector(iFrameName);
+
     if (el != null) {
       IFrameElement frameElement  = (IFrameElement) el;
       Window        contentWindow = frameElement.getContentWindow();
@@ -50,7 +48,7 @@ public class InterAppEventBusForIFrame {
         storage.setItem(uuid,
                         dataString);
 
-        contentWindow.postMessage();
+//        contentWindow.postMessage();
 
       }
 
@@ -58,10 +56,10 @@ public class InterAppEventBusForIFrame {
     NodeList nodeList = Browser.getWindow()
                                .getDocument()
                                .getElementsByTagName("iFrame");
-    Element  element;
-    for (Node node : nodeList) {
-      if (node.getNodeType())
-    }
+//    Element  element;
+//    for (Node node : nodeList) {
+////      if (node.getNodeType())
+//    }
 
     //    Window window = DomGlobal.window.top;
     //ra
@@ -151,17 +149,17 @@ public class InterAppEventBusForIFrame {
   }
 
   public static boolean isSupported() {
-    Window window = DomGlobal.window.top;
-    String ua     = window.navigator.userAgent;
-    if (!ua.contains("MSIE ")) {
-      return true;
-    } else {
-      if (ua.contains("MSIE 10.0")) {
-        return true;
-      } else if (ua.contains("MSIE 9.0")) {
-        return true;
-      }
-    }
+//    Window window = DomGlobal.window.top;
+//    String ua     = window.navigator.userAgent;
+//    if (!ua.contains("MSIE ")) {
+//      return true;
+//    } else {
+//      if (ua.contains("MSIE 10.0")) {
+//        return true;
+//      } else if (ua.contains("MSIE 9.0")) {
+//        return true;
+//      }
+//    }
     return false;
   }
 }

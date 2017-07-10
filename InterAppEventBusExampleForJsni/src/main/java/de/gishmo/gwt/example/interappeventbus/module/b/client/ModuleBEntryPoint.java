@@ -8,7 +8,7 @@ import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
-import de.gishmo.gwt.interappeventbus.client.jsni.base.InterAppEventBus;
+import de.gishmo.gwt.interappeventbus.client.jsni.InterAppEventBus;
 import de.gishmo.gwt.interappeventbus.client.jsni.prototype.InterAppEventHandler;
 
 public class ModuleBEntryPoint

@@ -1,0 +1,21 @@
+@CHARSET "UTF-8";
+
+.headline {
+	margin: 16px 4px 1px 12px;
+	font-family: arial, sans-serif;
+	font-size: 24px;
+	font-weight: bold;
+	color: darkgrey;
+}
+.protocolContainer {
+	margin: 6px 12px 2px 12px;
+	padding: 6px;
+	border: 1px solid darkgray;
+	width: 512px;
+	background-color: white;
+	font-family: arial, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: darkgrey;
+	height: 628px;
+}
