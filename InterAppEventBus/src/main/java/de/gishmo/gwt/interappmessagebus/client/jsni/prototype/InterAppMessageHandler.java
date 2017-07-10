@@ -1,11 +1,11 @@
-package de.gishmo.gwt.interappeventbus.client.jsni.prototype;
+package de.gishmo.gwt.interappmessagebus.client.jsni.prototype;
 
-import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArrayString;
 
-public interface InterAppEventHandler {
+public interface InterAppMessageHandler {
 
   String getType();
 
-  void onEvent(JavaScriptObject data);
+  void onEvent(JsArrayString data);
 
 }

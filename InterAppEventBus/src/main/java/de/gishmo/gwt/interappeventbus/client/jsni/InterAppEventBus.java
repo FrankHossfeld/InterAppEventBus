@@ -1,4 +1,4 @@
-package de.gishmo.gwt.interappeventbus.client.jsni.base;
+package de.gishmo.gwt.interappeventbus.client.jsni;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.Scheduler;

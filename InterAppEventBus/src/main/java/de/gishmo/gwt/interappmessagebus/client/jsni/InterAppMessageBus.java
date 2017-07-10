@@ -1,56 +1,57 @@
-package de.gishmo.gwt.interappeventbus.client.jsni;
+package de.gishmo.gwt.interappmessagebus.client.jsni;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArrayString;
 import com.google.gwt.core.client.Scheduler;
-import com.google.gwt.core.client.Scheduler.ScheduledCommand;
-import de.gishmo.gwt.interappeventbus.client.jsni.prototype.InterAppEventHandler;
+import de.gishmo.gwt.interappmessagebus.client.jsni.prototype.InterAppMessageHandler;
+import elemental.events.MessageEvent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class InterAppEventBus {
+public class InterAppMessageBus {
 
-  private static Map<String, List<InterAppEventHandler>> handlersByType = new HashMap<>();
+  private static Map<String, List<InterAppMessageHandler>> handlersByType = new HashMap<>();
 
-  public static void fireEvent(String eventType) {
-    _fireEvent(eventType,
+  public static void fireEvent(String frameName,
+                               String eventType) {
+    _fireEvent(frameName,
+               eventType,
                null);
   }
 
-  private static native void _fireEvent(String eventType,
+  private static native void _fireEvent(String frameName,
+                                        String eventType,
                                         JavaScriptObject data)/*-{
-      var ua = window.navigator.userAgent;
-      var msie = ua.indexOf("MSIE ");
-      var event = null;
-      if (msie > 0) {
-          //since IE9 doesn't support constructor initialization
-          event = document.createEvent('CustomEvent');
-          event.initCustomEvent(eventType, false, false, data);
-      } else {
-          //DOM Level 4 Api as default
-          event = new CustomEvent(eventType, {
-              'detail': data
-          });
-      }
-      //$doc instead document, since doucment refer to iframe document
-      // whereas $doc refer to parent document
-      $doc.dispatchEvent(event);
+      // post message
+      $wnd.top.frames[frameName].contentWindow.postMessage(data, '*');
   }-*/;
 
-  public static void fireEvent(String eventType,
-                               JavaScriptObject data) {
-    _fireEvent(eventType,
-               data);
+  public static void fireEvent(String frameName,
+                               String eventType,
+                               JsArrayString data) {
+    JsArrayString dataWithEventName = ((JsArrayString) JsArrayString.createArray(0));
+    dataWithEventName.push(frameName);
+    dataWithEventName.push(eventType);
+    if (data != null) {
+      for (int i = 0; i < data.length(); i++) {
+        dataWithEventName.push(data.get(i));
+      }
+    }
+    _fireEvent(frameName,
+               eventType,
+               dataWithEventName);
   }
 
-  public static void addListener(InterAppEventHandler handler) {
+  public static void addListener(InterAppMessageHandler handler) {
     String type = handler.getType();
     if (type == null) {
       return;
     }
-    List<InterAppEventHandler> list = handlersByType.get(type);
+    List<InterAppMessageHandler> list = handlersByType.get(type);
     if (list == null) {
       list = new ArrayList<>();
       handlersByType.put(type,
@@ -61,28 +62,41 @@ public class InterAppEventBus {
   }
 
   private static native void _addListener(String type) /*-{
-      //$doc instead document, since doucment refer to iframe document
-      // whereas $doc refer to parent document
-      $doc.addEventListener(
-          type,
-          function (e) {
-              $entry(@de.gishmo.gwt.interappeventbus.client.jsni.base.InterAppEventBus::pickListener(Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(type, e.detail));
-          }, false);
+      function postMessageListener(e) {
+//          var curUrl = $wnd.location.protocol + "//" + $wnd.location.hostname;
+//          if (e.origin !== curUrl) return; // security check to verify that we receive event from trusted source
+              $entry(@de.gishmo.gwt.interappmessagebus.client.jsni.InterAppMessageBus::pickListener(Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(type, e));
+          }
+//      // Listen to message from child window
+//      if ($wnd.BrowserDetect.browser == "Explorer") {
+//          // fucking IE
+//          $wnd.attachEvent("onmessage", postMessageListener, false);
+//      } else {
+          // "Normal" browsers
+          $wnd.addEventListener("message", postMessageListener, false);
+//      }
   }-*/;
 
-  private static void pickListener(String type,
-                                   final JavaScriptObject data) {
-    final List<InterAppEventHandler> list = handlersByType.get(type);
-    if (list != null) {
-      Scheduler.get()
-               .scheduleDeferred(new ScheduledCommand() {
-                 @Override
-                 public void execute() {
-                   for (InterAppEventHandler handler : list) {
+  private static void pickListener(String typeParameter,
+                                   final JavaScriptObject event) {
+    GWT.debugger();
+    MessageEvent messageEvent = event.cast();
+    JsArrayString stringArray = (JsArrayString) messageEvent.getData();
+    String type = stringArray.get(1);
+    if (typeParameter.equals(type)) {
+      JsArrayString data = ((JsArrayString) JsArrayString.createArray(0));
+      for (int i = 2; i < stringArray.length(); i++) {
+        data.push(stringArray.get(i));
+      }
+      final List<InterAppMessageHandler> list = handlersByType.get(type);
+      if (list != null) {
+        Scheduler.get()
+                 .scheduleDeferred(() -> {
+                   for (InterAppMessageHandler handler : list) {
                      handler.onEvent(data);
                    }
-                 }
-               });
+                 });
+      }
     }
   }
 
