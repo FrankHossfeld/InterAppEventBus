@@ -27,7 +27,20 @@ public class InterAppMessageBus {
                                         String eventType,
                                         JavaScriptObject data)/*-{
       // post message
-      $wnd.top.frames[frameName].contentWindow.postMessage(data, '*');
+      debugger;
+      var window = $wnd;
+      var ua = window.navigator.userAgent;
+      var safari = ua.indexOf("Safari");
+      var chrome = ua.indexOf("Chrome");
+      if (safari > 0) {
+          if (chrome > 0) {
+              window.frames[frameName].contentWindow.postMessage(data, '*');
+          } else {
+              window.frames[frameName].postMessage(data, '*');
+          }
+      } else {
+          window.frames[frameName].contentWindow.postMessage(data, '*');
+      }
   }-*/;
 
   public static void fireEvent(String frameName,
@@ -65,15 +78,16 @@ public class InterAppMessageBus {
       function postMessageListener(e) {
 //          var curUrl = $wnd.location.protocol + "//" + $wnd.location.hostname;
 //          if (e.origin !== curUrl) return; // security check to verify that we receive event from trusted source
-              $entry(@de.gishmo.gwt.interappmessagebus.client.jsni.InterAppMessageBus::pickListener(Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(type, e));
-          }
+          $entry(@de.gishmo.gwt.interappmessagebus.client.jsni.InterAppMessageBus::pickListener(Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(type, e));
+      }
+
 //      // Listen to message from child window
 //      if ($wnd.BrowserDetect.browser == "Explorer") {
 //          // fucking IE
 //          $wnd.attachEvent("onmessage", postMessageListener, false);
 //      } else {
-          // "Normal" browsers
-          $wnd.addEventListener("message", postMessageListener, false);
+      // "Normal" browsers
+      $wnd.addEventListener("message", postMessageListener, false);
 //      }
   }-*/;
 
