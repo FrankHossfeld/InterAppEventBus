@@ -38,6 +38,12 @@ public class InterAppMessageEvent {
     this.parameters = builder.parameters;
   }
 
+  /**
+   * Erzeugt aus einem Json-String eine Instanz eines InterAppMessageEvent
+   *
+   * @param jsonString JSON-String eines InterAppMessageEvents
+   * @return Instanz des InterAppMesssageEventmit den Daten des JSON-Strings
+   */
   public static InterAppMessageEvent parseJson(String jsonString) {
     JsonObject jsonObject = Json.instance()
                                 .parse(jsonString);
@@ -62,26 +68,56 @@ public class InterAppMessageEvent {
     return new Builder();
   }
 
+  /**
+   * URL der Source (aktuell nur zur Info)
+   *
+   * @return URL der Source
+   */
   public String getSource() {
     return source;
   }
 
+  /**
+   * URL des Targets (aktuell nur zur Info)
+   *
+   * @return URL des Targets
+   */
   public String getTarget() {
     return target;
   }
 
+  /**
+   * Name des Frames in den die Message gepostet werden soll
+   *
+   * @return ame des Frames in den die Message gepostet werden soll
+   */
   public String getFrameName() {
     return frameName;
   }
 
+  /**
+   * Name des Events (required)
+   *
+   * @return Name des Events
+   */
   public String getEventType() {
     return eventType;
   }
 
+  /**
+   * Liste der Parameter (Liste of Strings)
+   *
+   * @return Liste mit Parametern
+   */
   public List<String> getParameters() {
     return parameters;
   }
 
+  /**
+   * Wandelt den Event in einen Json-String um
+   *
+   * @return Json_string des Events
+   */
   public String toJson() {
     JsonObject jsonObject = JsJsonObject.create();
     jsonObject.put(InterAppMessageEvent.KEY_SOURCE,
@@ -108,31 +144,66 @@ public class InterAppMessageEvent {
     String eventType;
     List<String> parameters = new ArrayList<>();
 
+    /**
+     * URL der Source (aktuell nur zur Info)
+     *
+     * @param source URL der Source
+     * @return InterAppMesssageBus Builder
+     */
     public Builder source(String source) {
       this.source = source;
       return this;
     }
 
+    /**
+     * URL des Targets (aktuell nur zur Info)
+     *
+     * @param target URL des Targets
+     * @return InterAppMesssageBus Builder
+     */
     public Builder target(String target) {
       this.target = target;
       return this;
     }
 
+    /**
+     * Name des Frames in den die Message gepostet werden soll (required)
+     *
+     * @param frameName Name des Frames
+     * @return InterAppMesssageBus Builder
+     */
     public Builder frameName(String frameName) {
       this.frameName = frameName;
       return this;
     }
 
+    /**
+     * Name des Events (required)
+     *
+     * @param eventType Name des Events
+     * @return InterAppMesssageBus Builder
+     */
     public Builder eventType(String eventType) {
       this.eventType = eventType;
       return this;
     }
 
+    /**
+     * Fügt einen String als Parameter zum Event hinzu. Es können 0 - n Parameter vom Typ String mitgegeben werdem.
+     *
+     * @param parameter Paramete des Events
+     * @return InterAppMesssageBus Builder
+     */
     public Builder add(String parameter) {
       parameters.add(parameter);
       return this;
     }
 
+    /**
+     * Erzeugt den Event mit den übergebenen Daten
+     *
+     * @return Instanz des InterAppMesssageEvent
+     */
     public InterAppMessageEvent build() {
       return new InterAppMessageEvent(this);
     }
