@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>de.gishmo.gwt.example</groupId>
+  <artifactId>InterAppMessageBusExampleForElementalModuleA</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
+  <packaging>gwt-app</packaging>
+
+  <properties>
+    <!-- Convenience property to set the GWT version -->
+    <gwtVersion>2.8.1</gwtVersion>
+
+    <!-- GWT needs at least java 1.6 -->
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+
+    <junit.version>4.12</junit.version>
+    <org.mockito.version>1.10.19</org.mockito.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.build.outputEncoding>UTF-8</project.build.outputEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.google.gwt</groupId>
+        <artifactId>gwt</artifactId>
+        <version>2.8.1</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.google.gwt</groupId>
+      <artifactId>gwt-user</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.gwt</groupId>
+      <artifactId>gwt-dev</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.gwt</groupId>
+      <artifactId>gwt-codeserver</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.gwt</groupId>
+      <artifactId>gwt-servlet</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>de.gishmo.gwt</groupId>
+      <artifactId>InterAppEventBus</artifactId>
+      <version>1.0</version>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.20</version>
+        <configuration>
+          <skipTests>true</skipTests>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.6.1</version>
+        <configuration>
+          <source>${maven.compiler.source}</source>
+          <target>${maven.compiler.target}</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>net.ltgt.gwt.maven</groupId>
+        <artifactId>gwt-maven-plugin</artifactId>
+        <version>1.0-rc-7</version>
+        <extensions>true</extensions>
+        <executions>
+          <execution>
+            <goals>
+              <goal>compile</goal>
+              <goal>package-app</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <classpathScope>compile</classpathScope>
+          <moduleName>de.gishmo.gwt.example.interappmessagebus.elemental.module.a.ModuleA</moduleName>
+          <moduleShortName>InterAppMessageBusExampleForElementalModuleA</moduleShortName>
+          <modules>de.gishmo.gwt.example.interappmessagebus.elemental.module.a.ModuleA</modules>
+          <failOnError>true</failOnError>
+          <!-- GWT 2.8 requires 1.8, hence define sourceLevel here if you use
+               a different source language for java compilation -->
+          <sourceLevel>1.8</sourceLevel>
+          <!-- Compiler configuration -->
+          <compilerArgs>
+            <!--Ask GWT to create the Story of Your Compile (SOYC) (gwt:compile)-->
+            <arg>-compileReport</arg>
+            <arg>-XcompilerMetrics</arg>
+          </compilerArgs>
+          <logLevel>TRACE</logLevel>
+          <skipModule>true</skipModule>
+          <codeServerPort>9876</codeServerPort>
+          <devmodeArgs>
+            <arg>-port</arg>
+            <arg>8888</arg>
+            <arg>-codeServerPort</arg>
+            <arg>9876</arg>
+          </devmodeArgs>
+          <startupUrls>
+            <startupUrl>InterAppMessageBusExampleForElemental.html</startupUrl>
+          </startupUrls>
+          <warDir>${project.basedir}/src/main/webapp</warDir>
+          <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
+          <systemProperties>
+            <gwt.persistentunitcachedir>${project.build.directory}/gwt/unitCache/</gwt.persistentunitcachedir>
+            <gwt.war.directory>${project.basedir}/src/main/webapp</gwt.war.directory>
+          </systemProperties>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

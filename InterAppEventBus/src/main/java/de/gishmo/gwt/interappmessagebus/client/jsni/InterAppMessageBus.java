@@ -18,6 +18,7 @@ public class InterAppMessageBus {
 
   public static void fireEvent(String frameName,
                                String eventType) {
+
     _fireEvent(frameName,
                eventType,
                null);
