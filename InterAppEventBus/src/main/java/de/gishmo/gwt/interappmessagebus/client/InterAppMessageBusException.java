@@ -1,8 +1,8 @@
-package de.gishmo.gwt.interappeventbus.client;
+package de.gishmo.gwt.interappmessagebus.client;
 
 public class InterAppMessageBusException
   extends Exception {
-  
+
   public InterAppMessageBusException() {
   }
 
