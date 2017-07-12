@@ -60,7 +60,7 @@ public class InterAppMessageBus {
                                                       .getDocument()
                                                       .getElementById(event.getFrameName());
     if (frameElement == null) {
-      throw new IndexOutOfBoundsException("iFrameElement with id >>" + event.getFrameName() + "<< not Found");
+      throw new NullPointerException("iFrameElement with id >>" + event.getFrameName() + "<< not Found");
     }
     frameElement.getContentWindow()
                 .postMessage(event.toJson(),

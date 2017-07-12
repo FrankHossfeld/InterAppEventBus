@@ -9,12 +9,12 @@ import java.util.List;
 
 public class InterAppMessageEvent {
 
-  private final static String KEY_SOURCE              = "source";
-  private final static String KEY_TARGET              = "target";
-  private final static String KEY_FRAME_NAME          = "frameName";
-  private final static String KEY_EVENT_TYPE          = "eventType";
-  private final static String KEY_NUMBER_OF_PAREMETER = "numberOfParameter";
-  private final static String KEY_PARAMETER           = "parameters";
+  private final static String KEY_SOURCE               = "source";
+  private final static String KEY_TARGET               = "target";
+  private final static String KEY_FRAME_NAME           = "frameName";
+  private final static String KEY_EVENT_TYPE           = "eventType";
+  private final static String KEY_NUMBER_OF_PAREMETERS = "numberOfParameters";
+  private final static String KEY_PARAMETER            = "parameters";
 
   private String       source;
   private String       target;
@@ -28,8 +28,8 @@ public class InterAppMessageEvent {
 
   private InterAppMessageEvent(Builder builder) {
     assert builder.source != null : "source has no value!";
-    assert builder.target != null : "source has no target!";
-    assert builder.frameName != null : "frameName has no target!";
+    assert builder.target != null : "target has no value!";
+    assert builder.frameName != null : "frameName has no value!";
     assert builder.eventType != null : "eventType has no value!";
 
     this.source = builder.source;
@@ -50,7 +50,7 @@ public class InterAppMessageEvent {
                                 .parse(jsonString);
     int parameterCount;
     try {
-      parameterCount = Integer.parseInt(jsonObject.get(InterAppMessageEvent.KEY_NUMBER_OF_PAREMETER));
+      parameterCount = Integer.parseInt(jsonObject.get(InterAppMessageEvent.KEY_NUMBER_OF_PAREMETERS));
     } catch (NumberFormatException e) {
       parameterCount = 0;
     }
@@ -129,7 +129,7 @@ public class InterAppMessageEvent {
                    this.frameName);
     jsonObject.put(InterAppMessageEvent.KEY_EVENT_TYPE,
                    this.eventType);
-    jsonObject.put(InterAppMessageEvent.KEY_NUMBER_OF_PAREMETER,
+    jsonObject.put(InterAppMessageEvent.KEY_NUMBER_OF_PAREMETERS,
                    Integer.toString(parameters.size()));
     for (int i = 0; i < parameters.size(); i++) {
       jsonObject.put(InterAppMessageEvent.KEY_PARAMETER + Integer.toString(i),
