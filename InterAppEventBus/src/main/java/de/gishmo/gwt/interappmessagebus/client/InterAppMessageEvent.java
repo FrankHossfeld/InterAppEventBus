@@ -22,6 +22,7 @@ public class InterAppMessageEvent {
   private String       eventType;
   private List<String> parameters;
 
+  @SuppressWarnings("unused")
   private InterAppMessageEvent() {
   }
 
