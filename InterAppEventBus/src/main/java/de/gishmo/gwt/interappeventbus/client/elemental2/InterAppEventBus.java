@@ -36,8 +36,7 @@ public class InterAppEventBus {
                         dataString);
 
         String ua = window.navigator.userAgent;
-        int msie = ua.indexOf("MSIE ");
-        if (msie > 0) {
+        if (ua.contains("MSIE ")) {
           window.alert("InterAppEventBus not yet implemented for Ineternet Explorer ... sorry");
         } else {
           CustomEvent customEvent = new CustomEvent(eventType);

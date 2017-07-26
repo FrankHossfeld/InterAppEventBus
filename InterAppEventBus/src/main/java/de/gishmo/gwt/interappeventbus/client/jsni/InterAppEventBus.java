@@ -22,9 +22,8 @@ public class InterAppEventBus {
   private static native void _fireEvent(String eventType,
                                         JavaScriptObject data)/*-{
       var ua = window.navigator.userAgent;
-      var msie = ua.indexOf("MSIE ");
       var event = null;
-      if (msie > 0) {
+    if (ua.contains("MSIE ")) {
           //since IE9 doesn't support constructor initialization
           event = document.createEvent('CustomEvent');
           event.initCustomEvent(eventType, false, false, data);
@@ -66,7 +65,7 @@ public class InterAppEventBus {
       $doc.addEventListener(
           type,
           function (e) {
-              $entry(@de.gishmo.gwt.interappeventbus.client.jsni.base.InterAppEventBus::pickListener(Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(type, e.detail));
+              $entry(@de.gishmo.gwt.interappeventbus.client.jsni.InterAppEventBus::pickListener(Ljava/lang/String;Lcom/google/gwt/core/client/JavaScriptObject;)(type, e.detail));
           }, false);
   }-*/;
 
